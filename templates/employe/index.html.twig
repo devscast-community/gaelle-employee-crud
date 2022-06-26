@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}Tous les employés{% endblock %}
+
+{% block body %}
+    <h1>Tous les employés</h1>
+
+    <a class="btn btn-primary" href="{{ path('app_employe_new') }}">Ajouter</a>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th>Poste</th>
+                    <th>Salaire</th>
+                    <th>Datedenaissance</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employe in employes %}
+                    <tr>
+                        <td>{{ employe.id }}</td>
+                        <td>{{ employe.prenom }}</td>
+                        <td>{{ employe.nom }}</td>
+                        <td>{{ employe.telephone }}</td>
+                        <td>{{ employe.email }}</td>
+                        <td>{{ employe.adresse }}</td>
+                        <td>{{ employe.poste }}</td>
+                        <td>{{ employe.salaire }}</td>
+                        <td>{{ employe.datedenaissance ? employe.datedenaissance|date('Y-m-d') : '' }}</td>
+                        <td>
+                            <a href="{{ path('app_employe_show', {'id': employe.id}) }}">Détails</a>
+                            <a href="{{ path('app_employe_edit', {'id': employe.id}) }}">Éditer</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
